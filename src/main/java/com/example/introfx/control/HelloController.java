@@ -1,5 +1,8 @@
-package com.example.introfx;
+package com.example.introfx.control;
 
+import com.example.introfx.HelloApplication;
+import com.example.introfx.model.FileOpenerData;
+import com.example.introfx.model.FileUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,6 +24,13 @@ public class HelloController {
     @FXML
     private TextArea fileContentTA;
 
+
+    public HelloController(){
+        System.out.println(FileOpenerData.user.getUsername());
+        System.out.println(FileOpenerData.user.getPassword());
+    }
+
+
     @FXML
     void openFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -29,6 +39,9 @@ public class HelloController {
         File file = fileChooser.showOpenDialog(stage);
         String path = file.getAbsolutePath();
         pathTF.setText(path);
+        String content = FileUtils.readFile(path);
+        fileContentTA.setText(content);
+
     }
 
 }
